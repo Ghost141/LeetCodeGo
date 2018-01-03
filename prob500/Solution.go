@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-var keyboard = map[int32]int{
+var keyboard = map[byte]int{
 	'a': 1,
 	'b': 2,
 	'c': 2,
@@ -37,9 +37,10 @@ var keyboard = map[int32]int{
 func findWords(words []string) (res []string) {
 	for i, str := range words {
 		str = strings.ToLower(str)
-		row := keyboard[int32(str[0])]
+		row := keyboard[str[0]]
 		add := true
-		for _, c := range str {
+		for j := range str {
+			c := str[j]
 			if keyboard[c] != row {
 				add = false
 				break
